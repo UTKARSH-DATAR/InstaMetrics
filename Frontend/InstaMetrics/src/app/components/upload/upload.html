@@ -1,0 +1,54 @@
+<div class="upload-card">
+  <label
+    for="fileInput"
+    class="upload-dropzone"
+    [class.upload-dropzone--loading]="loading"
+  >
+    <div class="upload-dropzone-inner">
+      <span class="material-icons upload-icon">cloud_upload</span>
+      <div class="upload-text">
+        <span class="upload-title">Drop your ZIP here</span>
+        <span class="upload-subtitle">or click to browse from your computer</span>
+      </div>
+    </div>
+    <input
+      id="fileInput"
+      type="file"
+      (change)="onFileSelected($event)"
+    />
+  </label>
+
+  <div *ngIf="loading" class="upload-loading">
+    <mat-progress-spinner mode="indeterminate" diameter="36"></mat-progress-spinner>
+    <span>Uploading &amp; analyzing your data…</span>
+  </div>
+
+  <p class="upload-message" *ngIf="message">{{ message }}</p>
+
+  <details class="upload-instructions">
+    <summary class="upload-instructions-summary">
+      <span class="material-icons upload-instructions-icon">help_outline</span>
+      <span>How to download your Instagram ZIP</span>
+    </summary>
+    <div class="upload-instructions-body">
+      <ol>
+        <li>Open Instagram, go to your profile and tap the hamburger menu.</li>
+        <li>Tap <strong>Account Centre</strong>.</li>
+        <li>Go to <strong>Your information and permissions</strong>.</li>
+        <li>
+          Select <strong>Download your information</strong> / <strong>Export your information</strong>.
+        </li>
+        <li>Choose <strong>Create export → To device</strong>.</li>
+        <li>In <strong>Customise information</strong>, select <strong>Connections</strong>.</li>
+        <li>Set <strong>Date range</strong> to <strong>All time</strong>.</li>
+        <li>Set <strong>Format</strong> to <strong>JSON</strong>.</li>
+        <li>Set <strong>Media quality</strong> to <strong>Low</strong> (faster export, smaller file).</li>
+        <li>Tap <strong>Start export</strong>.</li>
+      </ol>
+      <p class="upload-instructions-note">
+        After some time, Instagram will email you when your export is ready. Download the ZIP from
+        that email and upload it here.
+      </p>
+    </div>
+  </details>
+</div>

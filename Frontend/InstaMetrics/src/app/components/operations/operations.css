@@ -1,0 +1,128 @@
+.operations-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.operations-header h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.operations-subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(100, 116, 139, 0.95);
+}
+
+.operations-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.operations-toggle-btn {
+  border-radius: 999px;
+  padding-inline: 0.95rem;
+  border-color: rgba(148, 163, 184, 0.8);
+  background-color: #f9fafb;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  text-transform: none;
+}
+
+.operations-toggle-btn:hover {
+  background-color: #eef2ff;
+  border-color: #6366f1;
+}
+
+.operations-toggle-icon {
+  font-size: 1.1rem;
+}
+
+.operations-message {
+  font-size: 0.86rem;
+  color: rgba(30, 64, 175, 0.95);
+}
+
+.operations-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.table-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.table-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background-color: rgba(129, 140, 248, 0.16);
+  color: #4f46e5;
+}
+
+/* Table styling */
+.mat-table-styled {
+  width: 100%;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.mat-table-styled .mat-header-cell {
+  background: linear-gradient(135deg, #4f46e5, #ec4899);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mat-table-styled .mat-cell {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.mat-table-styled .mat-row:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.mat-table-styled .mat-row:hover {
+  background-color: #eef2ff;
+  transition: background-color 0.18s ease;
+}
+
+.mat-table-styled a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mat-table-styled a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .operations-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

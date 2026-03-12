@@ -1,0 +1,91 @@
+<div class="operations-card">
+  <div class="operations-header">
+    <h2>Insights</h2>
+    <p class="operations-subtitle">
+      Choose what you’d like to inspect and we’ll render clean tables for you.
+    </p>
+  </div>
+
+  <div class="operations-actions">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="operations-toggle-btn"
+      (click)="loadNonFollowers()"
+    >
+      <span class="material-icons operations-toggle-icon">person_off</span>
+      <span>Non-followers</span>
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      class="operations-toggle-btn"
+      (click)="loadPendingRequests()"
+    >
+      <span class="material-icons operations-toggle-icon">hourglass_empty</span>
+      <span>Pending requests</span>
+    </button>
+  </div>
+
+  <p class="operations-message" *ngIf="message">{{ message }}</p>
+
+  <div class="operations-tables">
+    <!-- Non-Followers Table -->
+    <section *ngIf="nonFollowers.length > 0">
+      <h3 class="table-title">
+        Non-followers
+        <span class="table-chip">{{ nonFollowers.length }}</span>
+      </h3>
+      <mat-table [dataSource]="nonFollowers" class="mat-elevation-z8 mat-table-styled">
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+          <mat-cell *matCellDef="let acc"> {{ acc.username }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="profileUrl">
+          <mat-header-cell *matHeaderCellDef> Profile </mat-header-cell>
+          <mat-cell *matCellDef="let acc">
+            <a [href]="acc.profileUrl" target="_blank">View</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="timestamp">
+          <mat-header-cell *matHeaderCellDef> Timestamp </mat-header-cell>
+          <mat-cell *matCellDef="let acc"> {{ formatDate(acc.timestamp) }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </section>
+
+    <!-- Pending Requests Table -->
+    <section *ngIf="pendingRequests.length > 0">
+      <h3 class="table-title">
+        Pending requests
+        <span class="table-chip">{{ pendingRequests.length }}</span>
+      </h3>
+      <mat-table [dataSource]="pendingRequests" class="mat-elevation-z8 mat-table-styled">
+        <ng-container matColumnDef="username">
+          <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+          <mat-cell *matCellDef="let acc"> {{ acc.username }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="profileUrl">
+          <mat-header-cell *matHeaderCellDef> Profile </mat-header-cell>
+          <mat-cell *matCellDef="let acc">
+            <a [href]="acc.profileUrl" target="_blank">View</a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="timestamp">
+          <mat-header-cell *matHeaderCellDef> Timestamp </mat-header-cell>
+          <mat-cell *matCellDef="let acc"> {{ formatDate(acc.timestamp) }} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 3rem 1.5rem 2.5rem;
+  box-sizing: border-box;
+  background: radial-gradient(circle at top left, #ffe8f0 0, #f4f4ff 35%, #f7fbff 70%, #ffffff 100%);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto 2.5rem;
+}
+
+.logo-mark {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff6cab, #7366ff);
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.logo-mark span {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.header-text h1 {
+  margin: 0 0 0.3rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.header-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.65);
+  max-width: 32rem;
+}
+
+.app-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.app-panel {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1.25rem;
+  padding: 1.6rem 1.5rem 1.9rem;
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.08),
+    0 0 0 1px rgba(148, 163, 184, 0.1);
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.panel-headline h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.panel-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.app-footer {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  font-size: 0.8rem;
+  color: rgba(100, 116, 139, 0.9);
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .app-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .app-header {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-root {
+    padding: 2rem 1.1rem 1.7rem;
+  }
+
+  .app-header {
+    align-items: flex-start;
+  }
+
+  .header-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .app-panel {
+    padding: 1.35rem 1.1rem 1.6rem;
+  }
+}

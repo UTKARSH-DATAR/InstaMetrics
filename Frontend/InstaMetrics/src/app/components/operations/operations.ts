@@ -54,4 +54,14 @@ export class Operations {
     if (!timestamp) return '';
     return new Date(timestamp * 1000).toLocaleString();
   }
+
+  profileUrl(acc: Account): string {
+    if (acc.profileUrl?.trim()) {
+      return acc.profileUrl;
+    }
+    if (acc.username?.trim()) {
+      return `https://www.instagram.com/${acc.username}/`;
+    }
+    return '';
+  }
 }

@@ -66,7 +66,7 @@ public class ZipParser {
         } else if (root instanceof Map) {
             Map<String, Object> rootMap = (Map<String, Object>) root;
 
-            // pending_follow_requests.json – accounts held under "relationships_follow_requests_sent"
+            // pending_follow_requests.json (legacy) – accounts under "relationships_follow_requests_sent"
             Object requests = rootMap.get("relationships_follow_requests_sent");
             if (requests instanceof List) {
                 List<Map<String, Object>> rawList = (List<Map<String, Object>>) requests;
@@ -115,12 +115,44 @@ public class ZipParser {
             }
         }
 
+        // Case 3: pending_follow_requests.json (new format) – data in "label_values"
+        List<Map<String, Object>> labelValues = (List<Map<String, Object>>) obj.get("label_values");
+        if (labelValues != null && !labelValues.isEmpty()) {
+            for (Map<String, Object> lv : labelValues) {
+                String label = (String) lv.get("label");
+                String value = (String) lv.get("value");
+                if (label == null || value == null) continue;
+                switch (label) {
+                    case "Username":
+                        if (!value.trim().isEmpty()) {
+                            username = value.toLowerCase();
+                        }
+                        break;
+                    case "URL":
+                        if (!value.trim().isEmpty()) {
+                            href = value;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (obj.get("timestamp") != null) {
+                timestamp = ((Number) obj.get("timestamp")).longValue();
+            }
+        }
+
         // If username is empty or missing, try to derive it from href
         if ((username == null || username.trim().isEmpty()) && href != null && !href.trim().isEmpty()) {
             String derived = extractUsernameFromHref(href);
             if (derived != null && !derived.trim().isEmpty()) {
                 username = derived.toLowerCase();
             }
+        }
+
+        // New pending-request exports often leave URL empty; build profile link from username
+        if ((href == null || href.trim().isEmpty()) && username != null && !username.trim().isEmpty()) {
+            href = "https://www.instagram.com/" + username + "/";
         }
 
         // Final fallback: if still missing, create a unique placeholder so frontend trackBy

@@ -45,7 +45,7 @@
         <ng-container matColumnDef="profileUrl">
           <mat-header-cell *matHeaderCellDef> Profile </mat-header-cell>
           <mat-cell *matCellDef="let acc">
-            <a [href]="acc.profileUrl" target="_blank">View</a>
+            <a [href]="profileUrl(acc)" target="_blank">View</a>
           </mat-cell>
         </ng-container>
 
@@ -74,7 +74,7 @@
         <ng-container matColumnDef="profileUrl">
           <mat-header-cell *matHeaderCellDef> Profile </mat-header-cell>
           <mat-cell *matCellDef="let acc">
-            <a [href]="acc.profileUrl" target="_blank">View</a>
+            <a [href]="profileUrl(acc)" target="_blank">View</a>
           </mat-cell>
         </ng-container>
 

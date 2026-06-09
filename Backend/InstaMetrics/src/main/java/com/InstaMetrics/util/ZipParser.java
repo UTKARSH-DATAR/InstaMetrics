@@ -3,6 +3,8 @@ package com.InstaMetrics.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.InstaMetrics.model.Account;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +18,11 @@ public class ZipParser {
     public static Map<String, Object> extractData(MultipartFile file) {
         Map<String, Object> data = new HashMap<>();
         ObjectMapper mapper = new ObjectMapper();
+        File tempFile = null;
 
         try {
             // Save MultipartFile to a temporary file so it can be consumed by java.util.zip.ZipFile
-            File tempFile = File.createTempFile("insta", ".zip");
+            tempFile = File.createTempFile("insta", ".zip");
             file.transferTo(tempFile);
 
             try (ZipFile zipFile = new ZipFile(tempFile)) {
@@ -42,11 +45,12 @@ public class ZipParser {
                 }
             }
 
-            // Ensure the temporary file is removed when the JVM exits
-            tempFile.deleteOnExit();
-
         } catch (IOException e) {
-            throw new RuntimeException("Error parsing ZIP file", e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error parsing ZIP file. Make sure it is a valid Instagram data export.", e);
+        } finally {
+            if (tempFile != null && tempFile.exists()) {
+                tempFile.delete();
+            }
         }
 
         return data;
